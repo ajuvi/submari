@@ -5,9 +5,12 @@ class Avatar(ABC):
 
     def __init__(self,x,y,width,height):
         self.x=x
-        self.y=y        
+        self.y=y
         self.width=width
         self.height=height
+
+    def collisio(self,other):
+        pass
 
     @abstractmethod
     def pintar(self,tauler):
