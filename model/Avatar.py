@@ -14,4 +14,4 @@ class Avatar(ABC):
         pass
 
     def __str__(self):
-        return json.dumps(self.__dict__)
+        return json.dumps({'x':self.x,'y':self.y,'width':self.width,'height':self.height})
