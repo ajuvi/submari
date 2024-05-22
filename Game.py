@@ -26,7 +26,7 @@ def main():
     pygame.key.set_repeat(1, 50)
 
     # Crear l'objecte del submari
-    sub = Submari('ictineu',screen_width/4,screen_height/2,20,30,'./imatges/submari.png')
+    sub = Submari('ictineu',screen_width/4,screen_height/2,100,30,'./imatges/submari.png')
 
     # Registrar el temps
     temps_inici = datetime.datetime.now()
@@ -63,7 +63,7 @@ def main():
         if (datetime.datetime.now()-temps_inici).seconds > interval_registre:                       
             temps_inici=datetime.datetime.now()
             # Crea un nou fill d'execució per a insertar a la base de dades
-            Thread(target=afegir_mesura, args=[sub.nom,sub.x,sub.y]).start()
+            Thread(target=afegir_mesura, args=[sub]).start()
  
         # Aplicar el doble buffering        
         screen.blit(tauler, (0, 0))
@@ -75,11 +75,9 @@ def main():
     quit()
 
 # Mètode que s'executa a dins d'un thread
-def afegir_mesura(nom,x,y):
-    try:
-        raise NotImplementedError("Has d'inserir les dades a la base de dades") 
-    except Exception as e:
-        print('Error en inserir a la base de dades. ' + str(e))
+# Utilitza la classe Persistencia per a guardar les dades del submarí
+def afegir_mesura(sub):
+    pass
 
 if __name__ == "__main__":
     main()
