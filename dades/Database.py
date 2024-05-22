@@ -37,6 +37,9 @@ class Database:
     def execute(self, sql, params=None):
         self._cursor.execute(sql, params or ())
 
+    def affected_rows(self):
+        return self._cursor.rowcount
+
     def commit(self):
         self._conn.commit()
 

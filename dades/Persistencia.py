@@ -11,10 +11,10 @@ class Persistencia:
                 val = [nom]        
                 db.execute(sql,val)    
                 db.commit()
-                return True
+                return db.affected_rows()
         except:
             print('ERROR en Persistencia.eliminar_mesures')
-            return False
+            return -1
 
     @staticmethod
     def afegir_mesura(nom,x,y):
