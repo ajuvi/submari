@@ -3,11 +3,11 @@ import json
 
 class Avatar(ABC):
 
-    def __init__(self,x,y,w,h):
+    def __init__(self,x,y,width,height):
         self.x=x
         self.y=y        
-        self.w=w
-        self.h=h
+        self.width=width
+        self.height=height
 
     @abstractmethod
     def pintar(self,tauler):

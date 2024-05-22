@@ -5,10 +5,11 @@ import pygame
 
 class Submari(Avatar):
 
-    def __init__(self,nom,x,y,w,h,imatge,velocitat=5):
-        super().__init__(x,y,w,h)
+    def __init__(self,nom,x,y,width,heigth,path_imatge,velocitat=5):
+        super().__init__(x,y,width,heigth)
         self.nom=nom
-        self.imatge=imatge
+        self.imatge = pygame.image.load(path_imatge)
+        self.imatge = pygame.transform.scale(self.imatge, (width, heigth))
         self.velocitat=velocitat
 
     def moure_esquerre(self):

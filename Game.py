@@ -10,7 +10,7 @@ def main():
     pygame.init()
     fpsClock = pygame.time.Clock()
 
-    # Paràmetres del joc
+    # Paràmetres del simulador
     FPS = 60
     screen_width=800
     screen_height=600
@@ -26,17 +26,21 @@ def main():
     pygame.key.set_repeat(1, 50)
 
     # Crear l'objecte del submari
-    sub = Submari('ictineu',screen_width/4,screen_height/2,20,30,pygame.image.load('./imatges/submari.png'))
+    sub = Submari('ictineu',screen_width/4,screen_height/2,20,30,'./imatges/submari.png')
 
     # Registrar el temps
     temps_inici = datetime.datetime.now()
+    interval_registre = 1
 
-    while True:
+    # Variable de sortida
+    sortir = False
+
+    while not sortir:
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+                sortir=True
+                print("SORTIR!")
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_LEFT:
                     raise NotImplementedError("Has de moure a l'esquerre el submari") 
@@ -46,6 +50,8 @@ def main():
                     raise NotImplementedError("Has de moure amunt el submari") 
                 if evento.key == pygame.K_DOWN:
                     raise NotImplementedError("Has de moure avall el submari") 
+                elif evento.key == pygame.K_ESCAPE:
+                    sortir = True                
 
         # Pintar el tauler de blau
         tauler.fill((0, 0, 25)) 
@@ -54,7 +60,7 @@ def main():
         #raise NotImplementedError("Has de pintar el submari en el tauler utilitzant el mètode pintar") 
 
         # Registrar posicions del submarí
-        if (datetime.datetime.now()-temps_inici).seconds > 1:                       
+        if (datetime.datetime.now()-temps_inici).seconds > interval_registre:                       
             temps_inici=datetime.datetime.now()
             # Crea un nou fill d'execució per a insertar a la base de dades
             Thread(target=afegir_mesura, args=[sub.nom,sub.x,sub.y]).start()
@@ -64,6 +70,9 @@ def main():
         pygame.display.flip()
         pygame.display.update()
         fpsClock.tick(FPS)
+    
+    pygame.quit()
+    quit()
 
 # Mètode que s'executa a dins d'un thread
 def afegir_mesura(nom,x,y):
