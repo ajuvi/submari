@@ -1,17 +1,15 @@
+from model.Avatar import Avatar
 import json
 import math
 import pygame
 
-class Submari:
+class Submari(Avatar):
 
-    def __init__(self,nom,x,y,w,h,imatge):
+    def __init__(self,nom,x,y,w,h,imatge,velocitat=5):
+        super().__init__(x,y,w,h)
         self.nom=nom
-        self.x=x
-        self.y=y        
-        self.w=w
-        self.h=h
         self.imatge=imatge
-        self.velocitat=5
+        self.velocitat=velocitat
 
     def moure_esquerre(self):
         self.x=self.x-self.velocitat
