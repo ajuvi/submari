@@ -40,7 +40,6 @@ def main():
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 sortir=True
-                print("SORTIR!")
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_LEFT:
                     raise NotImplementedError("Has de moure a l'esquerre el submari") 
