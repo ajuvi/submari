@@ -13,7 +13,7 @@ def mesura(nom):
 @app.route("/mesura/all/<nom>", methods=['GET'])
 def mesures(nom):
 	try:
-		return json_response(Persistencia.obtenir_mesures(nom),default=str)
+		return json_response(Persistencia.obtenir_mesures(nom))
 	except Exception as e:
 		return json_error(e)
 
