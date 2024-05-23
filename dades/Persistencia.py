@@ -10,12 +10,11 @@ class Persistencia:
                 sql = "DELETE FROM mesura WHERE nom=%s"
                 val = [nom]        
                 db.execute(sql,val)    
-                num = db.affected_rows()
                 db.commit()
-                return num
+                return db.affected_rows()
         except:
             print('ERROR en Persistencia.eliminar_mesures')
-            raise
+            return -1
 
     @staticmethod
     def afegir_mesura(nom,x,y):
@@ -25,15 +24,17 @@ class Persistencia:
                 val = [nom,x,y]
                 db.execute(sql, val)    
                 db.commit()
+                return True
         except:
             print('ERROR en Persistencia.afegir_mesura')
-            raise
+            return False
+
 
     @staticmethod
-    def obtenir_mesures(nom):        
+    def obtenir_mesures(nom):
+        data=[]
         try:
             with Database() as db:
-                data=[]
                 sql = "SELECT * FROM mesura WHERE nom=%s"
                 val = [nom]
                 db.execute(sql, val)
@@ -41,21 +42,20 @@ class Persistencia:
                 while row!=None:
                     data.append(row)
                     row = db.fetchone()    
-                return data
         except:
             print('ERROR en Persistencia.obtenir_mesures')
-            raise
+        return data
 
     @staticmethod
     def obtenir_ultima_mesura(nom):
-        
+        row=None
         try:            
             with Database() as db:
                 sql = "SELECT * FROM mesura WHERE nom=%s ORDER BY data DESC LIMIT 1"
                 val = [nom]
                 db.execute(sql, val)
                 row = db.fetchone()
-                return row
         except:
             print('ERROR en Persistencia.obtenir_mesures')
-            raise
+            
+        return row
