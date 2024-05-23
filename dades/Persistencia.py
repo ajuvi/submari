@@ -54,6 +54,7 @@ class Persistencia:
                 val = [nom]
                 db.execute(sql, val)
                 row = db.fetchone()
+                return row
         except:
             print('ERROR en Persistencia.obtenir_mesures')
             raise
